@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Lantern Bay Capital</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#1a2a4a;
+    --gold:#c9a84c;
+    --light:#f5f5f5;
+    --text:#333;
+    --subtext:#555;
+  }
+  body{font-family:'Georgia',serif;color:var(--text);background:#fff}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:#fff;border-bottom:1px solid #e0e0e0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;
+  }
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-text{line-height:1.1}
+  .logo-text .top{font-size:15px;letter-spacing:3px;font-family:'Arial',sans-serif;font-weight:700;color:var(--navy)}
+  .logo-text .bot{font-size:10px;letter-spacing:4px;font-family:'Arial',sans-serif;color:var(--navy)}
+  .nav-links{display:flex;gap:28px}
+  .nav-links a{font-family:'Arial',sans-serif;font-size:13px;letter-spacing:1px;color:var(--navy);transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{width:22px;height:2px;background:var(--navy);display:block;transition:.3s}
+  .mobile-menu{display:none;flex-direction:column;background:#fff;border-bottom:1px solid #e0e0e0;padding:0 24px 16px}
+  .mobile-menu a{padding:12px 0;font-family:'Arial',sans-serif;font-size:14px;letter-spacing:1px;color:var(--navy);border-bottom:1px solid #f0f0f0}
+  .mobile-menu.open{display:flex}
+
+  /* PAGES */
+  .page{display:none;min-height:calc(100vh - 57px)}
+  .page.active{display:block}
+
+  /* HOME */
+  .hero-img{width:100%;height:220px;object-fit:cover;object-position:center}
+  .hero-img-placeholder{
+    width:100%;height:220px;
+    background:linear-gradient(135deg,#2a3f6f 0%,#1a2a4a 60%,#c9a84c 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-tagline{
+    background:var(--light);padding:36px 24px;text-align:center;
+  }
+  .hero-tagline p{
+    font-size:20px;line-height:1.5;color:var(--navy);font-weight:bold;max-width:560px;margin:0 auto;
+  }
+  .home-cta{text-align:center;padding:8px 24px 40px;background:var(--light)}
+  .btn{
+    display:inline-block;margin-top:16px;
+    background:var(--navy);color:#fff;
+    font-family:'Arial',sans-serif;font-size:13px;letter-spacing:1.5px;
+    padding:12px 28px;border:none;cursor:pointer;transition:background .2s;
+  }
+  .btn:hover{background:var(--gold)}
+  .btn-outline{
+    background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+    font-family:'Arial',sans-serif;font-size:13px;letter-spacing:1.5px;
+    padding:11px 28px;cursor:pointer;transition:.2s;display:inline-block;margin-top:16px;
+  }
+  .btn-outline:hover{background:var(--navy);color:#fff}
+
+  /* SECTION LAYOUT */
+  .section{padding:40px 24px;max-width:680px;margin:0 auto}
+  .section-title{
+    font-family:'Arial',sans-serif;font-weight:900;font-size:22px;
+    letter-spacing:2px;text-transform:uppercase;color:var(--navy);
+    margin-bottom:20px;
+  }
+  .section p{font-size:16px;line-height:1.7;color:var(--subtext);margin-bottom:16px}
+
+  /* CRITERIA */
+  .criteria-grid{display:flex;flex-direction:column;gap:24px;margin-top:8px}
+  .criterion{border-left:3px solid var(--gold);padding-left:16px}
+  .criterion h3{font-family:'Arial',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .criterion p{font-size:15px;line-height:1.6;color:var(--subtext);margin:0}
+
+  /* ABOUT */
+  .subsection-title{
+    font-family:'Arial',sans-serif;font-weight:700;font-size:17px;
+    letter-spacing:2px;text-transform:uppercase;color:var(--navy);
+    margin:32px 0 12px;
+  }
+  .deal-team-item{margin-bottom:8px;font-size:15px;line-height:1.6;color:var(--subtext)}
+  .deal-team-item strong{color:var(--navy)}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--light);border-left:3px solid var(--gold);
+    padding:28px 24px;margin-top:8px;
+  }
+  .contact-box p{font-size:16px;line-height:1.7;color:var(--subtext);margin-bottom:16px}
+  .contact-email{
+    font-family:'Arial',sans-serif;font-size:15px;color:var(--navy);
+    font-weight:700;letter-spacing:.5px;
+  }
+  .contact-email:hover{color:var(--gold)}
+
+  /* DIVIDER */
+  .divider{height:1px;background:#e0e0e0;margin:0 24px}
+
+  /* FOOTER */
+  footer{
+    background:var(--navy);color:#aaa;
+    font-family:'Arial',sans-serif;font-size:11px;letter-spacing:1px;
+    text-align:center;padding:20px 24px;
+  }
+  footer span{color:#fff}
+
+  @media(min-width:640px){
+    .hamburger{display:none}
+    .nav-links{display:flex}
+    .hero-img-placeholder,.hero-img{height:320px}
+    .hero-tagline p{font-size:24px}
+  }
+  @media(max-width:639px){
+    .hamburger{display:flex}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="showPage('home')" style="cursor:pointer">
+    <!-- SVG Lantern Logo -->
+    <svg width="42" height="52" viewBox="0 0 42 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cap -->
+      <polygon points="21,2 38,14 4,14" fill="#c9a84c"/>
+      <!-- Body -->
+      <rect x="10" y="14" width="22" height="26" rx="2" fill="none" stroke="#1a2a4a" stroke-width="2"/>
+      <!-- Vertical bars -->
+      <line x1="21" y1="14" x2="21" y2="40" stroke="#1a2a4a" stroke-width="1.5"/>
+      <!-- Horizontal bar -->
+      <line x1="10" y1="27" x2="32" y2="27" stroke="#1a2a4a" stroke-width="1.5"/>
+      <!-- Base -->
+      <rect x="14" y="40" width="14" height="4" rx="1" fill="#1a2a4a"/>
+      <!-- Hook -->
+      <line x1="21" y1="44" x2="21" y2="50" stroke="#1a2a4a" stroke-width="2"/>
+      <line x1="18" y1="50" x2="24" y2="50" stroke="#1a2a4a" stroke-width="2"/>
+    </svg>
+    <div class="logo-text">
+      <div class="top">LANTERN BAY</div>
+      <div class="bot">CAPITAL</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="#" onclick="showPage('home');return false">Home</a>
+    <a href="#" onclick="showPage('criteria');return false">Investment Criteria</a>
+    <a href="#" onclick="showPage('about');return false">About</a>
+    <a href="#" onclick="showPage('contact');return false">Contact</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');closeMenu();return false">Home</a>
+  <a href="#" onclick="showPage('criteria');closeMenu();return false">Investment Criteria</a>
+  <a href="#" onclick="showPage('about');closeMenu();return false">About</a>
+  <a href="#" onclick="showPage('contact');closeMenu();return false">Contact</a>
+</div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <img src="lanternbay.jpg" alt="Lantern Bay" class="hero-img"/>
+  <div class="hero-tagline">
+    <p>Lantern Bay Capital seeks to acquire a business in Southern California, with a focus on Orange County.</p>
+  </div>
+  <div class="home-cta">
+    <a class="btn" href="#" onclick="showPage('criteria');return false">VIEW INVESTMENT CRITERIA</a>
+    &nbsp;&nbsp;
+    <a class="btn-outline" href="#" onclick="showPage('contact');return false">GET IN TOUCH</a>
+  </div>
+  <div class="divider"></div>
+  <div class="section">
+    <div class="section-title">Overview</div>
+    <p>Lantern Bay Capital is committed to acquiring and growing a single business in Southern California, with a focus on Orange County.</p>
+    <p>Lantern Bay Capital is operated by an independent investor and has a streamlined decision-making structure, committed capital, and a strong network of relationships with lenders and investors.</p>
+  </div>
+</div>
+
+<!-- INVESTMENT CRITERIA -->
+<div class="page" id="page-criteria">
+  <div class="section">
+    <div class="section-title">Investment Criteria</div>
+    <div class="criteria-grid">
+      <div class="criterion">
+        <h3>Strong Reputation</h3>
+        <p>A strong customer reputation and an ethos of doing the right thing because it's the right thing to do.</p>
+      </div>
+      <div class="criterion">
+        <h3>Stable Revenues &amp; Margins</h3>
+        <p>At least 3 years of stable revenues and margins.</p>
+      </div>
+      <div class="criterion">
+        <h3>Based in Orange County, California</h3>
+        <p>Lantern Bay Capital is focused on Southern California with a strong preference for Orange County businesses.</p>
+      </div>
+      <div class="criterion">
+        <h3>Earnings of $500K+</h3>
+        <p>EBITDA or SDE needs to be $500K or above to be a good fit.</p>
+      </div>
+    </div>
+    <div style="margin-top:36px;text-align:center">
+      <a class="btn" href="#" onclick="showPage('contact');return false">REACH OUT</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="section">
+    <div class="section-title">About</div>
+    <div class="subsection-title">Overview</div>
+    <p>Lantern Bay Capital is committed to acquiring and growing a single business in Southern California, with a focus on Orange County. Lantern Bay Capital is operated by an independent investor and has a streamlined decision-making structure, committed capital, and a strong network of relationships with lenders and investors.</p>
+
+    <div class="subsection-title">Leadership</div>
+    <p>Josh is an independent investor, military veteran, and seasoned leader with 20+ years of experience leading teams, building relationships, and driving growth. He has strong ties to the Orange County community, a deep-rooted passion for small business, and plans to operate and grow the business he acquires for the long term.</p>
+
+    <div class="subsection-title">Deal Team</div>
+    <p>The team will vary based on the specifics of the deal. Preferred partners include:</p>
+    <div style="margin-top:12px">
+      <div class="deal-team-item"><strong>Banks / Lending Brokers:</strong> Live Oak Bank, Pioneer Capital</div>
+      <div class="deal-team-item"><strong>Legal:</strong> SMB Law Group, Steckler Wayne Cherry &amp; Love</div>
+      <div class="deal-team-item"><strong>Due Diligence Providers:</strong> Cayne Crossing, Guardian Due Diligence</div>
+      <div class="deal-team-item"><strong>Insurance:</strong> Symphony Risk Solutions, Oberle Risk Strategies</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <div class="contact-box">
+      <p>If you're a business owner or broker and Lantern Bay Capital sounds like a match, please reach out.</p>
+      <a class="contact-email" href="mailto:josh@lanternbaycapital.com">josh@lanternbaycapital.com</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 <span>Lantern Bay Capital</span>. All rights reserved.
+</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+</script>
+</body>
+</html>
